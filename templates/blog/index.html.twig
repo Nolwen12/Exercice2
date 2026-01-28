@@ -9,12 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/nolwe/Exercice2/src/Controller/BlogController.php</code></li>
-        <li>Your template at <code>C:/Users/nolwe/Exercice2/templates/blog/index.html.twig</code></li>
-    </ul>
+    <h1>Venez lire nos articles! ✅</h1>
+    {% for listes in liste %}
+        <ul>
+            <li><a href="{{path('blog_show', {'id' : loop.index0})}}">{{listes.titre}}</a></li>
+        </ul>
+        
+    {% else %}
+        <p>Il n'y a aucun article</p>
+    {% endfor %}
+    <p> Il y a  {{liste|length}} article(s) </p>
 </div>
 {% endblock %}

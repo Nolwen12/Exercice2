@@ -11,13 +11,15 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <nav>
+        <a href="{{path('home')}}">Accueil</a>
+        <a href="{{path('blog_list')}}">Liste articles</a>
+        <a href="{{path('contact')}}">Contact</a>
+    </nav>
     <body>
-        <nav>
-            <a href="{{path('home')}}">Accueil</a>
-            <a href="{{path('blog_list')}}">Liste articles</a>
-            <a href="{{path('blog_show')}}">Détail</a>
-            <a href="{{path('contact')}}">Contact</a>
-        </nav>
         {% block body %}{% endblock %}
     </body>
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
 </html>
