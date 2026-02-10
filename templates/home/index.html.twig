@@ -22,5 +22,11 @@
         <li>Your controller at <code>C:/Users/nolwe/Exercice2/src/Controller/HomeController.php</code></li>
         <li>Your template at <code>C:/Users/nolwe/Exercice2/templates/home/index.html.twig</code></li>
     </ul>
+    {% include '/alert.html.twig' with {
+        alert: {
+            title: 'Attention',
+            content: 'Une erreur est survenue'
+        }
+    } %}
 </div>
 {% endblock %}

@@ -1,0 +1,12 @@
+<div class="post-card">
+    {% set mois = [
+        "janvier", "février", "mars", "avril", "mai", "juin",
+        "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+    ] %}
+
+    <h1>{{ post.titre }}</h1>
+    <h3>{{ post.auteur }}</h3>
+    <p>{{ post.contenue|slice(0, 150) }}...</p>
+    <p>{{ post.date|date("d") }} {{ mois[article.date|date("n") -1] }} {{ article.date|date("Y")}}</p>
+</div>
+

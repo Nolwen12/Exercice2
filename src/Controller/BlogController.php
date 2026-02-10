@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Article;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class BlogController extends AbstractController
 {
@@ -53,5 +54,48 @@ final class BlogController extends AbstractController
             'id' => $id,
             'article' => $article,
         ]);
+    }
+
+    #[Route('/api/posts', methods: ['GET'])]
+    public function apiList(): JsonResponse
+    {
+        $liste = [
+                ["titre" => "L'art de la dance"], 
+                ["titre" => "Thèâtre : Venez voir Roman Doduik"], 
+                ["titre" => "Mentaliste"]
+                ];
+        return $this->json([
+            'success' => true,
+            'count' => count($liste),
+            'data' => $liste
+            ], 200);
+    }
+
+     #[Route('/api/posts/{id}', methods: ['GET'])]
+    public function apiArticle(int $id): JsonResponse
+    {
+        $liste = ["L'art de la dance", "Théâtre : Venez voir Roman Doduik", "Mentalistes : Peuvent-ils vraiment entrez dans notre tête"];
+        $articles = [
+                    ['titre' => $liste[0], 
+                        'auteur' => "Victor Hugo",
+                        'contenue' => "Visual Studio Code, BootStrap et Wamp",
+                        'date' => "2026/01/28"],
+                    ['titre' => $liste[1], 
+                        'auteur' => "Lamartine",
+                        'contenue' => "Spectacle marrant",
+                        'date' => " 2025/11/14"],
+                    ['titre' => $liste[2], 
+                        'auteur' => "Jean de la Fontaine",
+                        'contenue' => "Les mentaliste analyse nos réactions et le comportement gestuelle de notre corp. Grâce à des questions bien précises et cette annalyse, ils savent ce que l'on pense.",
+                        'date' => "2024/04/03"]
+        ];
+
+        $article = $articles[$id];
+
+        return $this->json([
+            'success' => true,
+            'count' => count($article),
+            'data' => $article
+            ], 200);
     }
 }

@@ -19,5 +19,12 @@
         <p>Il n'y a aucun article</p>
     {% endfor %}
     <p> Il y a  {{liste|length}} article(s) </p>
+
+    {% include '/alert.html.twig' with {
+        alert: {
+            title: 'Attention',
+            content: 'Une erreur est survenue'
+        }
+    } %}
 </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -12,57 +13,69 @@ class Article
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-    private string $titre = "j'ai";
-    private string $auteur = "changé ";
-    private string $contenue = "de variable";
-    private string $date = "alors laiisse moi tranquille";
+
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
+
+    #[ORM\Column]
+    private ?\DateTime $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $published = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitre(): string
+    public function getTitle(): ?string
     {
-        return $this->titre;
+        return $this->title;
     }
 
-    public function setTitre($titre) : string
+    public function setTitle(string $title): static
     {
-        $this->titre = $titre;
-        return $this->titre;
+        $this->title = $title;
+
+        return $this;
     }
 
-    public function getAuteur(): string
+    public function getContent(): ?string
     {
-        return $this->auteur;
+        return $this->content;
     }
 
-    public function setAuteur($auteur) : string
+    public function setContent(string $content): static
     {
-        $this->auteur = $auteur;
-        return $this->auteur;
+        $this->content = $content;
+
+        return $this;
     }
 
-    public function getContenue(): string
+    public function getCreatedAt(): ?\DateTime
     {
-        return $this->contenue;
+        return $this->createdAt;
     }
 
-    public function setContenue($contenue) : string
+    public function setCreatedAt(\DateTime $createdAt): static
     {
-        $this->contenue = $contenue;
-        return $this->contenue;
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
-    public function getDate(): string
+    public function isPublished(): ?bool
     {
-        return $this->date;
+        return $this->published;
     }
 
-    public function setDate($date) : string
+    public function setPublished(bool $published): static
     {
-        $this->date = $date;
-        return $this->date;
+        $this->published = $published;
+
+        return $this;
     }
 }

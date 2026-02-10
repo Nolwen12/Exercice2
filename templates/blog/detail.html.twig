@@ -11,20 +11,19 @@
 <div class="example-wrapper">
     {% if article.date|date('U') >= "now"|date_modify('-7 days')|date('U') %}
         {
-            <a href="https://www.flaticon.com/fr/icones-gratuites/honneurs" title="honneurs icônes">Honneurs icônes créées par smashingstocks - Flaticon</a> ; 
+            <a href="https://www.flaticon.com/fr/icones-gratuites/honneurs" title="honneurs icônes">Récents </a> ; 
         }
     {% endif %}
 
-    {{article|slice(0,1)}}
+    {% include 'blog/post_card.html.twig' with { post: article } %}
+    
+    {{article.date|slice(0,1)}}
 
-    {% set mois = [
-        "janvier", "février", "mars", "avril", "mai", "juin",
-        "juillet", "août", "septembre", "octobre", "novembre", "décembre"
-    ] %}
-
-    <h1>{{article.titre|upper}} </h1>
-    <h3> De {{article.auteur}}</h3>
-    <p>{{article.contenue}}</p>
-    <p> Le {{ article.date|date("d") }} {{ mois[article.date|date("n") -1] }} {{ article.date|date("Y") }}</p>
+    {% include '/alert.html.twig' with {
+        alert: {
+            title: 'Attention',
+            content: 'Une erreur est survenue'
+        }
+    } %}
 </div>
 {% endblock %}
